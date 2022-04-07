@@ -13,8 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
       extractDoc: true,
     },
   })
-  
-  outputChannel.show();
 
   function findFirst<T = Record<string, any>>(from: Array<T>, predicate: Partial<Record<keyof T, string | Array<string>>>) {
     let matched: T | undefined

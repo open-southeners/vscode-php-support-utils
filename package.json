@@ -6,6 +6,13 @@
   "engines": {
     "vscode": "^1.65.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-southeners/vscode-php-support-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/open-southeners/vscode-php-support-utils/issues"
+  },
   "categories": [
     "Other"
   ],
@@ -109,9 +116,10 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile -- --minify",
+    "bundle": "yarn run vscode:prepublish && vsce package",
     "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-    "watch": "npm run compile -- --sourcemap --watch",
-    "esbuild": "npm run compile -- --sourcemap",
+    "watch": "yarn run compile -- --sourcemap --watch",
+    "esbuild": "yarn run compile -- --sourcemap",
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
