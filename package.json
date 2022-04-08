@@ -3,6 +3,7 @@
   "displayName": "PHP Support Utils",
   "description": "Extension that enables support for VSCode to manage PHP files as classes, traits, enums, etc",
   "version": "1.0.0",
+  "publisher": "open-southeners",
   "engines": {
     "vscode": "^1.65.0"
   },
