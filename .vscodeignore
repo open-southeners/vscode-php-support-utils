@@ -15,7 +15,7 @@ vendor
 .DS_Store
 .github/**
 *.vsix
-*.gif
+images/*.gif
 README.md
 .git/**
 .gitignore
