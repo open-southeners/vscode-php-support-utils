@@ -1,15 +1,16 @@
 # PHP Support Utils
 
-Extension that enables support for VSCode to manage PHP files as classes, traits, enums, etc...
+[![Visual Studio Marketplace Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/open-southeners.php-support-utils)](https://marketplace.visualstudio.com/items?itemName=open-southeners.php-support-utils&ssr=false#version-history) [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/open-southeners.php-support-utils)](https://marketplace.visualstudio.com/items?itemName=open-southeners.php-support-utils&ssr=false#version-history) [![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/open-southeners.php-support-utils)](https://marketplace.visualstudio.com/items?itemName=open-southeners.php-support-utils&ssr=false#review-details) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/open-southeners.php-support-utils)
 
-**Note: [Download it early (alpha version) here](https://cdn.discordapp.com/attachments/957280084845289532/961769592630411294/php-support-utils-1.0.0.vsix)**
+Extension that enables support for VSCode to improve handling with PHP, files as classes, traits, enums, etc...
 
-**We recommend to use [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) along with this.**
+![demo](images/demo.gif)
 
 ## Features
 
 - Create PHP files, classes, traits, interfaces & enums
 - Copy PHP objects files namespaces
+- Some PHP snippets for classes, objects, etc
 
 ## Acknowledgements
 
@@ -18,3 +19,7 @@ Huge thanks to this projects to make this possible:
 - [php-parser](https://github.com/glayzzle/php-parser)
 - [lodash](https://github.com/lodash/lodash)
 - [vscode](https://github.com/microsoft/vscode)
+
+## License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE.md).
