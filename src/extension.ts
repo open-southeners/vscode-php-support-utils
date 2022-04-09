@@ -51,7 +51,6 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('php-support-utils.copyNamespace', async (file: Uri) => {
-      
       const document = await workspace.openTextDocument(file);
       
       const text = document.getText();
@@ -69,5 +68,4 @@ export function activate(context: ExtensionContext) {
   );
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
