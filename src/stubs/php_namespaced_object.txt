@@ -1,8 +1,0 @@
-<?php
-
-namespace {{ namespace }};
-
-{{ type }} {{ name }}
-{
-  ${1://} 
-}
