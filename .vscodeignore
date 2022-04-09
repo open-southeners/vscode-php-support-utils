@@ -15,7 +15,6 @@ vendor
 .DS_Store
 .github/**
 *.vsix
-CHANGELOG.md
 README.md
 .git/**
 .gitignore
