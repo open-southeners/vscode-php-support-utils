@@ -20,7 +20,3 @@ export function getDocumentIndentationAsString(document: TextEditor, defaultSize
 
   return (insertSpaces ? ' ' : '\t').repeat(sizeNumber as number)
 }
-
-export function removeFilenameFromPath(path: string) {
-  return 
-}

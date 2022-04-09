@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.2] - 2022-04-10
+
+### Added
+
+- New command `php-support-utils.newObject` for create a object with multiple choices (class, trait, interface, enum)
+- Github workflow for automate tests & publishing
+
+### Fixed
+
+- Futher fixes to objects creation
+
 ## [1.1.1] - 2022-04-09
 
 ### Changed

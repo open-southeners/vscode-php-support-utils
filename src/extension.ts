@@ -26,25 +26,31 @@ export function activate(context: ExtensionContext) {
   );
 
   context.subscriptions.push(
-    commands.registerCommand('php-support-utils.newClass', (folder: Uri) => {
+    commands.registerCommand('php-support-utils.newObject', () => {
+      createObjectFile();
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('php-support-utils.newClass', (folder?: Uri) => {
       createObjectFile('class', folder);
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('php-support-utils.newTrait', (folder: Uri) => {
+    commands.registerCommand('php-support-utils.newTrait', (folder?: Uri) => {
       createObjectFile('trait', folder);
     })
   );
   
   context.subscriptions.push(
-    commands.registerCommand('php-support-utils.newInterface', (folder: Uri) => {
+    commands.registerCommand('php-support-utils.newInterface', (folder?: Uri) => {
       createObjectFile('interface', folder);
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('php-support-utils.newEnum', (folder: Uri) => {
+    commands.registerCommand('php-support-utils.newEnum', (folder?: Uri) => {
       createObjectFile('enum', folder);
     })
   );

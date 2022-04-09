@@ -1,18 +1,18 @@
 import path from "path";
 import type { Declaration, Namespace } from "php-parser";
 import { Uri, workspace } from "vscode";
-import { PHP_OBJECT_TYPES, PHP_VIRTUAL_SEPARATOR } from "../constants";
+import { PHP_OBJECT_TYPES, PHP_VIRTUAL_SEPARATOR, PHP_VIRTUAL_TRAILING_SEPARATOR_REGEXP } from "../constants";
 import { findFirst } from "./collections";
 import { getComposerProjectFile, parseCode } from "./php";
 
 export function namespaceJoin(...parts: Array<string>) {
   return parts.map(part => {
-    if (part.endsWith('\\')) {
-      return part.replace(/\\$/, '')
+    if (part.endsWith(PHP_VIRTUAL_SEPARATOR)) {
+      return part.replace(PHP_VIRTUAL_TRAILING_SEPARATOR_REGEXP, '')
     }
 
     return part
-  }).filter(Boolean).join(PHP_VIRTUAL_SEPARATOR);
+  }).filter(Boolean).join(PHP_VIRTUAL_SEPARATOR).replace('/', PHP_VIRTUAL_SEPARATOR);
 }
 
 export function getNamespace(code: string) {
@@ -90,6 +90,8 @@ export async function guessBaseNamespace(file: Uri) {
       ''
     )
   );
+
+  console.log({ matchedFromAutoload, unmappedNamespacePart })
 
   if (unmappedNamespacePart && !unmappedNamespacePart.includes('.') && unmappedNamespacePart.length > 0) {
     return namespaceJoin(matchedFromAutoload, unmappedNamespacePart)

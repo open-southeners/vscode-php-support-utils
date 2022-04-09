@@ -1,28 +1,82 @@
 {
   "name": "php-support-utils",
   "displayName": "PHP Support Utils",
-  "description": "Improve PHP support like handling file classes, namespaces, etc",
+  "publisher": "open-southeners",
   "icon": "images/icon.jpg",
   "version": "1.1.1",
-  "publisher": "open-southeners",
-  "engines": {
-    "vscode": "^1.65.0"
+  "description": "Improve PHP support like handling file classes, namespaces, etc",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "php",
+    "file management",
+    "namespaces",
+    "classes",
+    "support",
+    "enums",
+    "traits",
+    "interfaces",
+    "objects"
+  ],
+  "bugs": {
+    "url": "https://github.com/open-southeners/vscode-php-support-utils/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/open-southeners/vscode-php-support-utils.git"
   },
-  "bugs": {
-    "url": "https://github.com/open-southeners/vscode-php-support-utils/issues"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
   "main": "./out/extension.js",
+  "scripts": {
+    "bundle": "yarn run vscode:prepublish && vsce package",
+    "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "deploy": "vsce publish --yarn",
+    "esbuild": "yarn run compile -- --sourcemap",
+    "lint": "eslint src --ext ts",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./out/test/runTest.js",
+    "vscode:prepublish": "yarn run compile -- --minify",
+    "watch": "yarn run compile -- --sourcemap --watch"
+  },
   "contributes": {
+    "commands": [
+      {
+        "command": "php-support-utils.newFile",
+        "shortTitle": "File",
+        "title": "Create PHP File"
+      },
+      {
+        "command": "php-support-utils.newObject",
+        "shortTitle": "Object",
+        "title": "Create PHP Object"
+      },
+      {
+        "command": "php-support-utils.newClass",
+        "shortTitle": "Class",
+        "title": "Create PHP Class"
+      },
+      {
+        "command": "php-support-utils.newTrait",
+        "shortTitle": "Trait",
+        "title": "Create PHP Trait"
+      },
+      {
+        "command": "php-support-utils.newInterface",
+        "shortTitle": "Interface",
+        "title": "Create PHP Interface"
+      },
+      {
+        "command": "php-support-utils.newEnum",
+        "shortTitle": "Enum",
+        "title": "Create PHP Enum"
+      },
+      {
+        "command": "php-support-utils.copyNamespace",
+        "shortTitle": "Copy Namespace",
+        "title": "Copy PHP Namespace",
+        "enablement": "resourceExtname == .php"
+      }
+    ],
     "menus": {
       "editor/title/context": [
         {
@@ -66,65 +120,25 @@
         }
       ]
     },
-    "submenus": [
-      {
-        "id": "php.newItem",
-        "label": "New PHP..."
-      }
-    ],
     "snippets": [
       {
         "language": "php",
         "path": "./snippets/classes.json"
       }
     ],
-    "commands": [
+    "submenus": [
       {
-        "command": "php-support-utils.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "php-support-utils.newFile",
-        "shortTitle": "File",
-        "title": "Create PHP File"
-      },
-      {
-        "command": "php-support-utils.newClass",
-        "shortTitle": "Class",
-        "title": "Create PHP Class"
-      },
-      {
-        "command": "php-support-utils.newTrait",
-        "shortTitle": "Trait",
-        "title": "Create PHP Trait"
-      },
-      {
-        "command": "php-support-utils.newInterface",
-        "shortTitle": "Interface",
-        "title": "Create PHP Interface"
-      },
-      {
-        "command": "php-support-utils.newEnum",
-        "shortTitle": "Enum",
-        "title": "Create PHP Enum"
-      },
-      {
-        "command": "php-support-utils.copyNamespace",
-        "shortTitle": "Copy Namespace",
-        "title": "Copy PHP Namespace",
-        "enablement": "resourceExtname == .php"
+        "id": "php.newItem",
+        "label": "New PHP..."
       }
     ]
   },
-  "scripts": {
-    "vscode:prepublish": "yarn run compile -- --minify",
-    "bundle": "yarn run vscode:prepublish && vsce package",
-    "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-    "watch": "yarn run compile -- --sourcemap --watch",
-    "esbuild": "yarn run compile -- --sourcemap",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "dependencies": {
+    "lodash.template": "^4.5.0",
+    "php-parser": "^3.1.0-beta.4"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -143,8 +157,7 @@
     "typescript": "^4.5.5",
     "vsce": "^2.7.0"
   },
-  "dependencies": {
-    "lodash.template": "^4.5.0",
-    "php-parser": "^3.1.0-beta.4"
+  "engines": {
+    "vscode": "^1.65.0"
   }
 }

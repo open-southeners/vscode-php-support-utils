@@ -2,8 +2,9 @@ import { stat, readFile } from "fs/promises";
 import template from "lodash.template";
 import path from "path";
 import { Engine } from "php-parser";
-import { SnippetString, Uri, window, workspace, env } from "vscode";
-import { PHP_OBJECT_MODIFIERS, PHP_OBJECT_TYPES } from "../constants";
+import { SnippetString, Uri, window, workspace } from "vscode";
+import { PHP_OBJECT_TYPES } from "../constants";
+import { getActiveFolder, workspaceIsWritable } from "./filesystem";
 import { capitalize, getDocumentIndentationAsString } from "./misc";
 import { guessBaseNamespace } from "./namespaces";
 
@@ -19,17 +20,24 @@ export function parseCode(code: string, filename = '') {
   return phpParser.parseCode(code, filename);
 }
 
-export async function createObjectFile(type: PhpObjectType, folder: Uri) {
+export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
+  const contextUri = await getActiveFolder(folder)
+
+  if (!contextUri || !workspaceIsWritable(contextUri)) {
+    return await window.showErrorMessage('Current workspace folder is not writable. Please try with a different one.')
+  }
+
+  const objectType = type || 'object'
   const fileName = await window.showInputBox({
-    title: `Create new PHP ${type}`,
-    placeHolder: `${capitalize(type)} name`,
+    title: `Create new PHP ${objectType}`,
+    placeHolder: `${capitalize(objectType)} name`,
     validateInput: async (value: string) => {
       if (!value.match(/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/)) {
         return 'Illegal filename. Try removing some symbols from it';
       }
 
       try {
-        await stat(path.posix.resolve(folder.path, `${value}.php`));
+        await stat(path.posix.resolve(contextUri.path, `${value}.php`));
 
         return 'File with the same name already exists';
       } catch (e) {
@@ -42,8 +50,8 @@ export async function createObjectFile(type: PhpObjectType, folder: Uri) {
     return;
   }
 
-  const newFileInWorkspacePath = folder.with({
-    path: path.posix.join(folder.path, `${fileName}.php`)
+  const newFileInWorkspacePath = contextUri.with({
+    path: path.posix.join(contextUri.path, `${fileName}.php`)
   });
 
   await workspace.fs.writeFile(newFileInWorkspacePath, Buffer.from('', 'utf-8'));
@@ -56,15 +64,18 @@ export async function createObjectFile(type: PhpObjectType, folder: Uri) {
     namespace = `namespace ${namespace};\n\n`
   }
 
-  const compile = template('<?php\n\n{{ namespace }}{{ type }} {{ name }}\n{\n{{ tabSpace }}${0:// }\n}', {
-    interpolate: /{{([\s\S]+?)}}/g
-  });
+  const compile = template(
+    '<?php\n\n{{ namespace }}{{ type }} {{ name }}\n{\n{{ tabSpace }}${0:// }\n}',
+    {
+      interpolate: /{{([\s\S]+?)}}/g
+    }
+  );
 
   document.insertSnippet(
     new SnippetString(
       compile({
-        type,
-        namespace,
+        type: objectType === 'object' ? '${1|' + PHP_OBJECT_TYPES.join(',') + '|}' : objectType,
+        namespace: namespace || '',
         name: fileName,
         tabSpace: getDocumentIndentationAsString(document)
       })
