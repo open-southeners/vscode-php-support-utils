@@ -21,13 +21,13 @@ export function parseCode(code: string, filename = '') {
 }
 
 export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
-  const contextUri = await getActiveFolder(folder)
+  const contextUri = await getActiveFolder(folder);
 
   if (!contextUri || !workspaceIsWritable(contextUri)) {
-    return await window.showErrorMessage('Current workspace folder is not writable. Please try with a different one.')
+    return await window.showErrorMessage('Current workspace folder is not writable. Please try with a different one.');
   }
 
-  const objectType = type || 'object'
+  const objectType = type || 'object';
   const fileName = await window.showInputBox({
     title: `Create new PHP ${objectType}`,
     placeHolder: `${capitalize(objectType)} name`,
@@ -58,10 +58,10 @@ export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
 
   const document = await window.showTextDocument(newFileInWorkspacePath);
 
-  let namespace = await guessBaseNamespace(newFileInWorkspacePath)
+  let namespace = await guessBaseNamespace(newFileInWorkspacePath);
 
   if (namespace) {
-    namespace = `namespace ${namespace};\n\n`
+    namespace = `namespace ${namespace};\n\n`;
   }
 
   const compile = template(
@@ -84,37 +84,41 @@ export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
 }
 
 export interface ComposerJsonFileAutoload {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'psr-4': Record<string, string | Array<string>>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'psr-0': Record<string, string | Array<string>>
-
+  
   // Rest is irrelevant from the current package features
   // TODO: Remove if unnecesary
   classmap: Array<string>
   files: Array<string>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'exclude-from-classmap': Array<string>
 }
 
 export interface ComposerJsonFile {
   autoload: Partial<ComposerJsonFileAutoload>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'autoload-dev': Partial<ComposerJsonFileAutoload>
 }
 
 export async function getComposerProjectFile(relative: Uri) {
-  let composerFilePath = (workspace.getWorkspaceFolder(relative) || workspace.workspaceFolders?.[0])?.uri.path
+  let composerFilePath = (workspace.getWorkspaceFolder(relative) || workspace.workspaceFolders?.[0])?.uri.path;
 
   if (!composerFilePath) {
     return false;
   }
 
-  composerFilePath = path.posix.resolve(composerFilePath, 'composer.json')
+  composerFilePath = path.posix.resolve(composerFilePath, 'composer.json');
 
   let composerFileContent: Partial<ComposerJsonFile>;
 
   try {
-    composerFileContent = JSON.parse(await readFile(composerFilePath, { encoding: 'utf8' }))
+    composerFileContent = JSON.parse(await readFile(composerFilePath, { encoding: 'utf8' }));
   } catch (e) {
-    return false
+    return false;
   }
 
-  return composerFileContent
+  return composerFileContent;
 }

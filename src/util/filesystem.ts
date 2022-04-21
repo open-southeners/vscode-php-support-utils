@@ -1,8 +1,8 @@
-import path from "path"
-import { commands, env, workspace, Uri } from "vscode"
+import path from "path";
+import { commands, env, workspace, Uri } from "vscode";
 
 export function getFolderFromFileUri(uri: Uri) {
-  return uri.with({ path: path.parse(uri.path).dir })
+  return uri.with({ path: path.parse(uri.path).dir });
 }
 
 export async function getExplorerFocusedFolder() {
@@ -20,7 +20,7 @@ export async function getActiveFolder(uri?: Uri) {
     return uri;
   }
 
-  const explorerActiveFolder = await getExplorerFocusedFolder()
+  const explorerActiveFolder = await getExplorerFocusedFolder();
 
   if (explorerActiveFolder && !isFile(explorerActiveFolder.path)) {
     return explorerActiveFolder;
