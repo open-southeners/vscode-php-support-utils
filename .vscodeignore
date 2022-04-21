@@ -20,3 +20,5 @@ README.md
 .git/**
 .gitignore
 tsconfig.json
+coverage/**
+demo/**
