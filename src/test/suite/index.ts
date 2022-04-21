@@ -32,7 +32,7 @@ export async function run(): Promise<void> {
   const nyc = new NYC({
     ...baseConfig,
     cwd: path.join(__dirname, '..', '..', '..'),
-    reporter: ['text-summary', 'html'],
+    reporter: ['text-summary', 'clover'],
     all: true,
     silent: false,
     instrument: true,
