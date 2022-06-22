@@ -33,6 +33,7 @@
     "deploy": "vsce publish --yarn",
     "esbuild": "yarn run compile -- --sourcemap",
     "lint": "eslint src --ext ts",
+    "lint:fix": "yarn run lint --fix",
     "transpile": "tsc -p ./",
     "pretest": "yarn run transpile && yarn run lint",
     "test": "node ./out/test/runTest.js",
