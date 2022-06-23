@@ -1,10 +1,12 @@
 import path from 'path';
-import { commands, env, ExtensionContext, SnippetString, Uri, window, workspace } from 'vscode';
+import { commands, env, ExtensionContext, OutputChannel, SnippetString, Uri, window, workspace } from 'vscode';
 import { EXT_OUTPUT_CHANNEL_NAME } from './constants';
 import { createObjectFile, getNamespace } from './util';
 
+let outputChannel: OutputChannel | null
+
 export function activate(context: ExtensionContext) {
-  const outputChannel = window.createOutputChannel(EXT_OUTPUT_CHANNEL_NAME);
+  outputChannel = window.createOutputChannel(EXT_OUTPUT_CHANNEL_NAME);
 
   context.subscriptions.push(
     commands.registerCommand('php-support-utils.newFile', async (folder: Uri) => {
@@ -69,9 +71,16 @@ export function activate(context: ExtensionContext) {
 
       await env.clipboard.writeText(namespace);
 
-      outputChannel.appendLine(`FQCN copied as "${namespace}"!`);
+      outputChannel?.appendLine(`FQCN copied as "${namespace}"!`);
     })
   );
 }
 
-export function deactivate() {}
+export function deactivate() {
+  if (outputChannel) {
+    outputChannel.clear()
+    outputChannel.dispose()
+  }
+
+  outputChannel = null
+}
