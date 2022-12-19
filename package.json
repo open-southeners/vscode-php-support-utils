@@ -125,7 +125,7 @@
     "snippets": [
       {
         "language": "php",
-        "path": "./snippets/classes.json"
+        "path": "./snippets/php.json"
       }
     ],
     "submenus": [

@@ -1,0 +1,212 @@
+{
+	"Inline typed variable": {
+		"prefix": [
+			"var"
+		],
+		"body": [
+			"$BLOCK_COMMENT_START* @var ${1:mixed} $${2} $BLOCK_COMMENT_END",
+			"\\$${2} = ${3};"
+		]
+	},
+	"Class file": {
+		"prefix": "class",
+		"body": [
+			"namespace ${1:App}${2};",
+			"",
+			"class ${TM_FILENAME_BASE:ClassName}${3: extends }${4}",
+			"{",
+			"\t${5:// }",
+			"}"
+		]
+	},
+	"Interface file": {
+		"prefix": "interface",
+		"body": [
+			"namespace ${1:App}${2};",
+			"",
+			"interface ${TM_FILENAME_BASE:ClassName}${3: extends }${4}",
+			"{",
+			"\t${5:// }",
+			"}"
+		]
+	},
+	"Trait file": {
+		"prefix": "trait",
+		"body": [
+			"namespace ${1:App}${2};",
+			"",
+			"trait ${TM_FILENAME_BASE:TraitName}",
+			"{",
+			"\t${5:// }",
+			"}"
+		]
+	},
+	"PHPUnit file": {
+		"prefix": "test",
+		"body": [
+			"namespace ${1:Tests}${2};",
+			"",
+			"use ${1}\\TestCase;",
+			"",
+			"class ${TM_FILENAME_BASE:ClassName}${3: extends TestCase}${4}",
+			"{",
+			"\t${5:// }",
+			"}"
+		]
+	},
+	"Multi-dimensional array": {
+		"description": "Multi-dimensional array or keyed array",
+		"prefix": [
+			"ma",
+			"marr",
+			"arr"
+		],
+		"body": [
+			"\\$${1:arr} = [",
+			"\t'${2:key1}' => '${3:value}',",
+			"\t${4:'${5:key2}' => '${6:value}',}",
+			"\t${7}",
+			"];"
+		]
+	},
+	"Array": {
+		"prefix": [
+			"list",
+			"arr"
+		],
+		"body": [
+			"\\$${1:arr} = [",
+			"\t'${2:value1}',",
+			"\t${3:'${4:value2}',}",
+			"\t${5}",
+			"];"
+		]
+	},
+	"Attribute": {
+		"prefix": [
+			"attr",
+			"#"
+		],
+		"body": [
+			"#[${1:Attribute(${2:'${3:args}'}$4)}]"
+		]
+	},
+	"Class constructor": {
+		"prefix": [
+			"__",
+			"_co",
+			"co",
+			"const",
+			"init"
+		],
+		"body": [
+			"public function __construct(${1:${2:${3|public ,protected ,private |}${4:Type }${5:\\$${6:argument}}}})",
+			"{",
+			"\t$7",
+			"}"
+		]
+	},
+	"Class method": {
+		"prefix": [
+			"pf",
+			"method",
+			"cfun",
+			"fun"
+		],
+		"body": [
+			"${1|public,protected,private|}${2: static} function ${3:methodName}(${4:${5:${6:Type }${7:\\$${8:argument}}}})",
+			"{",
+			"\t$9",
+			"}"
+		]
+	},
+	"Arrow function": {
+		"prefix": [
+			"fn",
+			"arrow"
+		],
+		"body": [
+			"fn (${1:${2:Type }\\$${3:argument}}) =>"
+		]
+	},
+	"Function": {
+		"prefix": [
+			"fun",
+			"anon"
+		],
+		"body": [
+			"function (${1:${2:Type }\\$${3:argument}}) =>"
+		]
+	},
+	"Class property": {
+		"prefix": "property",
+		"body": [
+			"$BLOCK_COMMENT_START*",
+			" * @var ${1:mixed}",
+			" $BLOCK_COMMENT_END",
+			"${1|public,protected,private|}${2: static} $${3:name};"
+		]
+	},
+	"Laravel model trait file": {
+		"prefix": [
+			"etrait",
+			"tmodel",
+			"mtrait"
+		],
+		"body": [
+			"namespace ${1:App}${2};",
+			"",
+			"trait ${TM_FILENAME_BASE:TraitName}",
+			"{",
+			"\t$BLOCK_COMMENT_START*",
+			"\t* Initialize a trait instance.",
+			"\t*",
+			"\t* @return void",
+			"\t$BLOCK_COMMENT_END",
+			"\tpublic function initialize${TM_FILENAME_BASE:TraitName}()",
+			"\t{",
+			"\t\t${3:// }",
+			"\t}",
+			"",
+			"\t${4:// }",
+			"}"
+		]
+	},
+	"Laravel model attribute": {
+		"prefix": [
+			"mattr",
+			"lattr",
+			"attr",
+			"mget",
+			"lget",
+			"cast"
+		],
+		"body": [
+			"public function ${1:attributeName}(): Attribute",
+			"{",
+			"\treturn new Attribute(",
+			"\t\tget: fn () => $3",
+			"\t);",
+			"}"
+		]
+	},
+	"Laravel model scope": {
+		"prefix": [
+			"scope",
+			"mscope",
+			"lscope"
+		],
+		"body": [
+			"public function scope${1:Name}(Builder \\$query$2)",
+			"{",
+			"\t\\$query->$3;",
+			"}"
+		]
+	},
+	"PHP shorthand output": {
+		"prefix": "!!",
+		"body": [
+			"<?= ${1:mixed} ?>"
+		]
+	}
+}
