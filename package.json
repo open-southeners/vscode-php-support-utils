@@ -43,6 +43,9 @@
     "vscode:prepublish": "yarn run compile -- --minify",
     "watch": "yarn run compile -- --sourcemap --watch"
   },
+  "sponsor": {
+    "url": "https://github.com/sponsors/open-southeners"
+  },
   "contributes": {
     "commands": [
       {
