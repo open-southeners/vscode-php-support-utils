@@ -25,15 +25,16 @@ jobs:
 
       - name: Get latest release info
         id: get-release-info
-        uses: release-flow/keep-a-changelog-action/get-release-info@v2
+        uses: release-flow/keep-a-changelog-action@v2
         with:
-          release-version: latest
+          command: query
+          version: latest
 
       - name: Publish to Github releases
         uses: softprops/action-gh-release@v1
         with:
           body: ${{ steps.get-release-info.outputs.release-notes }}
-          prerelease: true
+          # prerelease: true
           files: '*.vsix'
 
       - name: Publish extension to Visual Studio Marketplace
