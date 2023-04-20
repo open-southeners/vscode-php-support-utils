@@ -40,7 +40,7 @@
     "transpile": "tsc -p ./",
     "pretest": "yarn run transpile && yarn run lint",
     "test": "node ./out/test/runTest.js",
-    "vscode:prepublish": "yarn run compile -- --minify",
+    "vscode:prepublish": "yarn run compile --minify",
     "watch": "yarn run compile --sourcemap --watch"
   },
   "sponsor": {
