@@ -45,12 +45,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - First package release!
 
-## Changed
+### Changed
 
 - Contextual snippets [thanks to this extension](https://marketplace.visualstudio.com/items?itemName=brpaz.contextual-snips)
 - Major refactor to all extension's internal API
 
-## Fixed
+### Fixed
 
 - Wrong namespace on new file creation when using [namespace mapping with Composer](https://getcomposer.org/doc/04-schema.md#autoload)
 - When creating a file or object file it appends if there is already an existing file with the same name
