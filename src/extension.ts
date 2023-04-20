@@ -4,7 +4,7 @@ import { EXT_OUTPUT_CHANNEL_NAME } from './constants';
 import { createObjectFile, getActiveFolder, getNamespace, workspaceIsWritable } from './util';
 import { stat } from 'fs/promises';
 
-let outputChannel: OutputChannel | null
+let outputChannel: OutputChannel | null;
 
 export function activate(context: ExtensionContext) {
   outputChannel = window.createOutputChannel(EXT_OUTPUT_CHANNEL_NAME);
@@ -26,7 +26,7 @@ export function activate(context: ExtensionContext) {
           }
 
           if (value.endsWith('.php')) {
-            return 'File already has a .php extension, please remove it'
+            return 'File already has a .php extension, please remove it';
           }
 
           try {
@@ -106,9 +106,9 @@ export function activate(context: ExtensionContext) {
 
 export function deactivate() {
   if (outputChannel) {
-    outputChannel.clear()
-    outputChannel.dispose()
+    outputChannel.clear();
+    outputChannel.dispose();
   }
 
-  outputChannel = null
+  outputChannel = null;
 }
