@@ -34,14 +34,14 @@
     "bundle": "yarn run vscode:prepublish && vsce package",
     "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "deploy": "vsce publish --yarn",
-    "esbuild": "yarn run compile -- --sourcemap",
+    "esbuild": "yarn run compile --sourcemap",
     "lint": "eslint src --ext ts",
     "lint:fix": "yarn run lint --fix",
     "transpile": "tsc -p ./",
     "pretest": "yarn run transpile && yarn run lint",
     "test": "node ./out/test/runTest.js",
     "vscode:prepublish": "yarn run compile -- --minify",
-    "watch": "yarn run compile -- --sourcemap --watch"
+    "watch": "yarn run compile --sourcemap --watch"
   },
   "sponsor": {
     "url": "https://github.com/sponsors/open-southeners"
