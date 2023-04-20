@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.4] - 2023-04-20
+
+### Fixed
+
+- New PHP file adding an "undefined.php" file when no text was introduced
+- Extra validation on new PHP file option
+
 ## [1.1.3] - 2022-04-21
 
 ### Fixed
