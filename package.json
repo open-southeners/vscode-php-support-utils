@@ -172,5 +172,6 @@
   },
   "engines": {
     "vscode": "^1.65.0"
-  }
+  },
+  "packageManager": "yarn@3.5.0"
 }
