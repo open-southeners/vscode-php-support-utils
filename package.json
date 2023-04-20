@@ -137,7 +137,7 @@
     "submenus": [
       {
         "id": "php.newItem",
-        "label": "New PHP..."
+        "label": "New PHP file..."
       }
     ]
   },
