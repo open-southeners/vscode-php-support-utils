@@ -20,6 +20,10 @@ export function parseCode(code: string, filename = '') {
   return phpParser.parseCode(code, filename);
 }
 
+export function isValidObjectName(name: string) {
+  return name.match(/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/);
+}
+
 export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
   const contextUri = await getActiveFolder(folder);
 
@@ -32,7 +36,7 @@ export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
     title: `Create new PHP ${objectType}`,
     placeHolder: `${capitalize(objectType)} name`,
     validateInput: async (value: string) => {
-      if (!value.match(/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/)) {
+      if (objectType !== 'class' && ! isValidObjectName(value)) {
         return 'Illegal filename. Try removing some symbols from it';
       }
 
@@ -64,8 +68,18 @@ export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
     namespace = `namespace ${namespace};\n\n`;
   }
 
+  let objectTypeReplacement = objectType === 'object'
+    ? '${1|' + PHP_OBJECT_TYPES.join(',') + '|}'
+    : objectType;
+  let returnClose = false;
+
+  if (objectType === 'class' && !isValidObjectName(fileName)) {
+    objectTypeReplacement = 'return new class';
+    returnClose = true;
+  }
+
   const compile = template(
-    '<?php\n\n{{ namespace }}{{ type }} {{ name }}\n{\n{{ tabSpace }}${0:// }\n}',
+    '<?php\n\n{{ namespace }}{{ type }} {{ name }}{\n{{ tabSpace }}${0:// }\n}{{ returnClose }}',
     {
       interpolate: /{{([\s\S]+?)}}/g
     }
@@ -74,10 +88,11 @@ export async function createObjectFile(type?: PhpObjectType, folder?: Uri) {
   document.insertSnippet(
     new SnippetString(
       compile({
-        type: objectType === 'object' ? '${1|' + PHP_OBJECT_TYPES.join(',') + '|}' : objectType,
+        type: objectTypeReplacement,
         namespace: namespace || '',
-        name: fileName,
-        tabSpace: getDocumentIndentationAsString(document)
+        name: returnClose ? '() ' : fileName+'\n',
+        tabSpace: getDocumentIndentationAsString(document),
+        returnClose: returnClose ? ';' : ''
       })
     )
   );
