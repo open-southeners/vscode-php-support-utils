@@ -25,6 +25,10 @@ Huge thanks to this projects to make this possible:
 - [lodash](https://github.com/lodash/lodash)
 - [vscode](https://github.com/microsoft/vscode)
 
+## Partners
+
+[![skore logo](https://github.com/open-southeners/partners/raw/main/logos/skore_logo.png)](https://getskore.com)
+
 ## License
 
 This project is open-sourced software licensed under the [MIT license](LICENSE.md).
