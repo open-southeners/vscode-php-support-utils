@@ -26,7 +26,7 @@ if (!tty.getWindowSize) {
 }
 
 export async function run(): Promise<void> {
-	const testsRoot = path.resolve(__dirname, '..');
+  const testsRoot = path.resolve(__dirname, '..');
 
   // Setup coverage pre-test, including post-test hook to report
   const nyc = new NYC({
@@ -56,12 +56,12 @@ export async function run(): Promise<void> {
   // console.log('Glob verification', await nyc.exclude.glob(nyc.cwd));
 
   await nyc.createTempDirectory();
-	// Create the mocha test
-	const mocha = new Mocha({
-		ui: 'tdd',
+  // Create the mocha test
+  const mocha = new Mocha({
+    ui: 'tdd',
     timeout: 10 * 1000,
     color: true
-	});
+  });
   
   // Add all files to the test suite
   const files = glob.sync('**/*.test.js', { cwd: testsRoot });
