@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.2.0] - 2023-10-30
+
+### Added
+
+- New PHP class now can add a class with invalid characters on its filename, **will create a [PHP anonymous class](https://www.php.net/manual/en/language.oop5.anonymous.php) instead**
+
 ## [1.1.4] - 2023-04-20
 
 ### Fixed
